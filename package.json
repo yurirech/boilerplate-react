@@ -5,21 +5,22 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prod-build": "cross-env NODE_ENV=production npm run build",
     "start": "next start",
-    "lint": "eslint src --max-warnings=0",
+    "lint": "eslint src -- --max-warnings=0",
     "test": "jest --maxWorkers=50%",
-    "test:watch": "jest --watch --maxWorkers=25%",
-    "test:ci": "jest --runInBand",
-    "generate": "yarn plop --plopfile generators/plopfile.js",
+    "test:watch": "jest -- --watch --maxWorkers=25%",
+    "test:ci": "jest -- --runInBand",
+    "generate": "npm run plop -- --plopfile generators/plopfile.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook ./public",
     "postinstall": "husky install",
     "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*": [
-      "yarn lint --fix",
-      "yarn test --findRelatedTests --bail"
+      "npm run lint --fix",
+      "npm run test --findRelatedTests --bail"
     ]
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "@types/styled-components": "^5.1.21",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
+    "cross-env": "^7.0.3",
     "eslint": "^8.8.0",
     "eslint-config-next": "^12.0.10",
     "eslint-config-prettier": "^8.3.0",
